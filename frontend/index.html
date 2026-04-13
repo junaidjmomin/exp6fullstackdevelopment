@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker - Kanban</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"></div>
+                <h2 class="logo-text">Tracker</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="section-label">PAGES</span>
+                    <a href="#" class="nav-item active"><span class="icon" data-lucide="clipboard-list"></span> Board</a>
+                    <a href="#" class="nav-item"><span class="icon" data-lucide="calendar"></span> Calendar</a>
+                    <a href="#" class="nav-item"><span class="icon" data-lucide="bar-chart-2"></span> Analytics</a>
+                </div>
+            </nav>
+
+            <div class="upgrade-card">
+                <h4>Pro Upgrade</h4>
+                <p>Unlock advanced features and infinite boards.</p>
+                <button class="btn-upgrade">Upgrade</button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <span class="icon" data-lucide="search" style="width: 16px; height: 16px; color: var(--text-muted)"></span>
+                    <input type="text" placeholder="Search tasks...">
+                </div>
+                
+                <div class="top-actions">
+                    <div class="view-toggle">
+                        <button class="toggle-tab">List</button>
+                        <button class="toggle-tab active">Board</button>
+                    </div>
+                    <button class="btn-primary" id="showAddFormBtn">+ New Task</button>
+                    <div class="profile-avatar"></div>
+                </div>
+            </header>
+
+            <!-- Board Area -->
+            <div class="board-area">
+                <div class="board-header">
+                    <h1 class="page-title">Project Tasks</h1>
+                </div>
+
+                <div class="kanban-board">
+                    <!-- Todo Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <h3>To Do <span class="task-count" id="pendingCount">0</span></h3>
+                            <button class="btn-ghost" style="padding: 4px;"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
+                        </div>
+                        <div class="column-content" id="listPending">
+                            <!-- Tasks drop here -->
+                        </div>
+                    </div>
+
+                    <!-- Completed Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <h3>Completed <span class="task-count" id="completedCount">0</span></h3>
+                            <button class="btn-ghost" style="padding: 4px;"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
+                        </div>
+                        <div class="column-content" id="listCompleted">
+                            <!-- Tasks drop here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Create Task Modal -->
+        <div class="modal hidden" id="taskModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create New Task</h3>
+                    <button class="btn-ghost" id="closeModalBtn" style="padding: 4px;"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+                </div>
+                <form id="taskForm">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="title" required placeholder="Design new landing page">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="description" rows="3" placeholder="Add some details..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label>Deadline</label>
+                            <input type="date" id="deadline">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label>Status</label>
+                            <select id="status">
+                                <option value="Pending">To Do</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Create Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lucide Icons script -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="app.js"></script>
+</body>
+</html>
