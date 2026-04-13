@@ -52,7 +52,7 @@
             </header>
 
             
-            <div class="board-area">
+            <div class="board-area" id="boardView">
                 <div class="board-header">
                     <h1 class="page-title">Project Tasks</h1>
                 </div>
@@ -62,7 +62,9 @@
                     <div class="kanban-column">
                         <div class="column-header">
                             <h3>To Do <span class="task-count" id="pendingCount">0</span></h3>
-                            <button class="btn-ghost" style="padding: 4px;"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
+                            <div class="dropdown">
+                                <button class="btn-ghost column-options-btn" style="padding: 4px;" data-column="pending"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
+                            </div>
                         </div>
                         <div class="column-content" id="listPending">
                             
@@ -73,7 +75,9 @@
                     <div class="kanban-column">
                         <div class="column-header">
                             <h3>Completed <span class="task-count" id="completedCount">0</span></h3>
-                            <button class="btn-ghost" style="padding: 4px;"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
+                            <div class="dropdown">
+                                <button class="btn-ghost column-options-btn" style="padding: 4px;" data-column="completed"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
+                            </div>
                         </div>
                         <div class="column-content" id="listCompleted">
                             
@@ -81,7 +85,57 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Calendar View -->
+            <div class="board-area hidden" id="calendarView">
+                <div class="board-header">
+                    <h1 class="page-title">Calendar</h1>
+                </div>
+                <div class="calendar-container" id="calendarContainer"></div>
+            </div>
+
+            <!-- Analytics View -->
+            <div class="board-area hidden" id="analyticsView">
+                <div class="board-header">
+                    <h1 class="page-title">Analytics</h1>
+                </div>
+                <div class="analytics-container">
+                    <div class="stat-card">
+                        <h3>Total Tasks</h3>
+                        <p id="statTotal">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Completion Rate</h3>
+                        <p id="statRate">0%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending Tasks</h3>
+                        <p id="statPending">0</p>
+                    </div>
+                </div>
+            </div>
         </main>
+
+        <!-- Profile Modal -->
+        <div class="modal hidden" id="profileModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Profile Settings</h3>
+                    <button class="btn-ghost" id="closeProfileBtn" style="padding: 4px;"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" value="Demo User" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" value="user@example.com" disabled>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-primary" style="width: 100%;" onclick="document.getElementById('profileModal').classList.add('hidden')">Save</button>
+                </div>
+            </div>
+        </div>
 
         
         <div class="modal hidden" id="taskModal">

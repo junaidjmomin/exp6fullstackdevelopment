@@ -20,29 +20,74 @@ const columnGhosts = document.querySelectorAll('.kanban-column .btn-ghost');
 
 
 btnUpgrade.addEventListener('click', () => {
-    alert('Pro Upgrade coming soon! Secure your advanced features early.');
+    alert('Pro features are now unlocked for you automatically!');
 });
 
+const profileModal = document.getElementById('profileModal');
 profileAvatar.addEventListener('click', () => {
-    alert('Profile Settings coming soon!');
+    profileModal.classList.remove('hidden');
 });
+document.getElementById('closeProfileBtn').addEventListener('click', () => profileModal.classList.add('hidden'));
 
 columnGhosts.forEach(btn => {
-    btn.addEventListener('click', () => {
-        alert('Column options menu (Rename, Sort, Clear) feature pending.');
+    btn.addEventListener('click', async (e) => {
+        const type = e.currentTarget.getAttribute('data-column');
+        if(confirm(`Clear all Tasks in ${type} column?`)) {
+            const tasksToDelete = allTasks.filter(t => type === 'completed' ? t.status === 'Completed' : t.status !== 'Completed');
+            for(let t of tasksToDelete) {
+                await fetch(`/tasks/${t._id}`, {method: 'DELETE'});
+            }
+            fetchTasks();
+        }
     });
 });
+
+const boardView = document.getElementById('boardView');
+const calendarView = document.getElementById('calendarView');
+const analyticsView = document.getElementById('analyticsView');
 
 navItems.forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
         navItems.forEach(n => n.classList.remove('active'));
         e.currentTarget.classList.add('active');
-        if(e.currentTarget.textContent.includes('Board') === false) {
-            alert(e.currentTarget.textContent.trim() + ' view not yet implemented.');
-        }
+        
+        boardView.classList.add('hidden');
+        calendarView.classList.add('hidden');
+        analyticsView.classList.add('hidden');
+        
+        const txt = e.currentTarget.textContent.trim();
+        if(txt.includes('Board')) boardView.classList.remove('hidden');
+        if(txt.includes('Calendar')) { calendarView.classList.remove('hidden'); renderCalendar(); }
+        if(txt.includes('Analytics')) { analyticsView.classList.remove('hidden'); renderAnalytics(); }
     });
 });
+
+function renderAnalytics() {
+    const total = allTasks.length;
+    const completed = allTasks.filter(t => t.status === 'Completed').length;
+    const pending = total - completed;
+    const rate = total > 0 ? Math.round((completed / total) * 100) : 0;
+    
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statRate').textContent = rate + '%';
+    document.getElementById('statPending').textContent = pending;
+}
+
+function renderCalendar() {
+    const cal = document.getElementById('calendarContainer');
+    cal.innerHTML = '';
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    days.forEach(d => {
+        cal.innerHTML += `<div class="calendar-day" style="min-height:auto; font-weight:bold; text-align:center; padding-bottom: 2px; min-height: 20px;">${d}</div>`;
+    });
+    
+    for(let i=1; i<=30; i++) {
+        const dayTasks = allTasks.filter(t => t.deadline && new Date(t.deadline).getDate() === i);
+        let taskHtml = dayTasks.map(t => `<div class="cal-task">${t.title.substring(0,10)}</div>`).join('');
+        cal.innerHTML += `<div class="calendar-day"><h4>${i}</h4>${taskHtml}</div>`;
+    }
+}
 
 
 viewToggleTabs.forEach(tab => {
