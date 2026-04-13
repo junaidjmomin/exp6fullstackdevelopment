@@ -23,7 +23,7 @@
 
   --font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   
-  /* Typography Sizes */
+  
   --page-title: 20px;
   --section-title: 14px;
   --card-title: 13px;
@@ -31,14 +31,14 @@
   --caption: 11px;
   --sidebar-item: 13px;
   
-  /* Spacing */
+  
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 12px;
   --spacing-lg: 16px;
   --spacing-xl: 20px;
 
-  /* Shadows */
+  
   --shadow-card: 0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0,0,0,0.04);
   --shadow-hover: 0px 4px 12px rgba(0, 0, 0, 0.10);
   --shadow-sidebar: 2px 0px 8px rgba(0, 0, 0, 0.15);
@@ -65,7 +65,7 @@ body {
   overflow: hidden;
 }
 
-/* Sidebar */
+
 .sidebar {
   width: 220px;
   background-color: var(--sidebar);
@@ -149,7 +149,7 @@ body {
 .btn-upgrade { background-color: var(--upgrade-card-accent); color: #fff; border: none; border-radius: 6px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
 .btn-upgrade:hover { background-color: #7b6ceb; }
 
-/* Main Workspace */
+
 .workspace {
   flex: 1;
   display: flex;
@@ -157,7 +157,7 @@ body {
   background-color: var(--background);
 }
 
-/* Top Bar */
+
 .top-bar {
   height: 56px;
   background-color: var(--surface);
@@ -228,7 +228,7 @@ body {
   border: 2px solid var(--surface);
 }
 
-/* Board Area */
+
 .board-area {
   flex: 1;
   padding: var(--spacing-xl);
@@ -299,7 +299,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md);
-  border-bottom: 1px solid transparent; /* or var(--border) */
+  border-bottom: 1px solid transparent; 
 }
 
 .column-header h3 {
@@ -328,7 +328,7 @@ body {
   gap: var(--spacing-sm);
 }
 
-/* Task Card */
+
 .task-card {
   background-color: var(--surface);
   border-radius: 10px;
@@ -367,7 +367,7 @@ body {
 .checkbox.checked {
   background-color: var(--primary);
   border-color: var(--primary);
-  /* Custom checkmark pseudo-element possible here */
+  
 }
 
 .task-body h4 {
@@ -396,7 +396,7 @@ body {
   font-weight: 500;
 }
 
-/* Base Buttons */
+
 .btn-primary {
   background-color: var(--primary);
   color: #FFFFFF;
@@ -429,7 +429,7 @@ body {
   height: auto;
 }
 
-/* Modal */
+
 .modal {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;

@@ -9,7 +9,7 @@ const completedCount = document.getElementById('completedCount');
 
 let allTasks = [];
 
-// Layout and Interactivity Elements
+
 const searchBarInput = document.querySelector('.search-bar input');
 const viewToggleTabs = document.querySelectorAll('.toggle-tab');
 const kanbanBoard = document.querySelector('.kanban-board');
@@ -18,7 +18,7 @@ const navItems = document.querySelectorAll('.nav-item');
 const profileAvatar = document.querySelector('.profile-avatar');
 const columnGhosts = document.querySelectorAll('.kanban-column .btn-ghost');
 
-// Button & Nav Interactions
+
 btnUpgrade.addEventListener('click', () => {
     alert('Pro Upgrade coming soon! Secure your advanced features early.');
 });
@@ -44,7 +44,7 @@ navItems.forEach(item => {
     });
 });
 
-// View Toggle
+
 viewToggleTabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
         viewToggleTabs.forEach(t => t.classList.remove('active'));
@@ -58,7 +58,7 @@ viewToggleTabs.forEach(tab => {
     });
 });
 
-// Search
+
 searchBarInput.addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase();
     const filtered = allTasks.filter(t => 
@@ -68,21 +68,21 @@ searchBarInput.addEventListener('input', (e) => {
     renderBoard(filtered);
 });
 
-// Modal Toggles
+
 showAddFormBtn.addEventListener('click', () => taskModal.classList.remove('hidden'));
 closeModalBtn.addEventListener('click', () => {
     taskModal.classList.add('hidden');
     taskForm.reset();
 });
 
-// API Calls
+
 const fetchTasks = async () => {
     try {
         const res = await fetch('/tasks');
         allTasks = await res.json();
         renderBoard(allTasks);
         
-        // Ensure search filter applies if text exists during auto-refresh
+        
         if(searchBarInput.value) {
             searchBarInput.dispatchEvent(new Event('input'));
         }
@@ -108,7 +108,7 @@ const renderBoard = (tasks) => {
         
         const deadlineText = task.deadline ? new Date(task.deadline).toLocaleDateString(undefined, {month: 'short', day: 'numeric'}) : 'No set date';
 
-        // Checkbox acts as quick status toggle
+        
         taskEl.innerHTML = `
             <div class="card-header">
                 <div class="checkbox ${isCompleted ? 'checked' : ''}" onclick="toggleStatus('${task._id}', '${task.status}')"></div>
@@ -128,11 +128,11 @@ const renderBoard = (tasks) => {
     pendingCount.textContent = pCount;
     completedCount.textContent = cCount;
     
-    // Re-initialize Lucide icons for dynamically added elements
+    
     lucide.createIcons();
 };
 
-// Form Post
+
 taskForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const newTask = {
@@ -153,7 +153,7 @@ taskForm.addEventListener('submit', async (e) => {
     fetchTasks();
 });
 
-// Inline Toggles & Delete
+
 window.toggleStatus = async (id, currentStatus) => {
     const newStatus = currentStatus === 'Pending' ? 'Completed' : 'Pending';
     await fetch(`/tasks/${id}`, {
@@ -165,14 +165,14 @@ window.toggleStatus = async (id, currentStatus) => {
 };
 
 window.deleteTask = async (e, id) => {
-    e.stopPropagation(); // Prevents card click
+    e.stopPropagation(); 
     await fetch(`/tasks/${id}`, {
         method: 'DELETE'
     });
     fetchTasks();
 };
 
-// Start
+
 fetchTasks();
-// Initialize Lucide icons on page load
+
 lucide.createIcons();

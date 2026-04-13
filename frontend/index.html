@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="app-layout">
-        <!-- Sidebar -->
+        
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="logo"></div>
@@ -32,9 +32,9 @@
             </div>
         </aside>
 
-        <!-- Main Workspace -->
+        
         <main class="workspace">
-            <!-- Top Bar -->
+            
             <header class="top-bar">
                 <div class="search-bar">
                     <span class="icon" data-lucide="search" style="width: 16px; height: 16px; color: var(--text-muted)"></span>
@@ -51,39 +51,39 @@
                 </div>
             </header>
 
-            <!-- Board Area -->
+            
             <div class="board-area">
                 <div class="board-header">
                     <h1 class="page-title">Project Tasks</h1>
                 </div>
 
                 <div class="kanban-board">
-                    <!-- Todo Column -->
+                    
                     <div class="kanban-column">
                         <div class="column-header">
                             <h3>To Do <span class="task-count" id="pendingCount">0</span></h3>
                             <button class="btn-ghost" style="padding: 4px;"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
                         </div>
                         <div class="column-content" id="listPending">
-                            <!-- Tasks drop here -->
+                            
                         </div>
                     </div>
 
-                    <!-- Completed Column -->
+                    
                     <div class="kanban-column">
                         <div class="column-header">
                             <h3>Completed <span class="task-count" id="completedCount">0</span></h3>
                             <button class="btn-ghost" style="padding: 4px;"><i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i></button>
                         </div>
                         <div class="column-content" id="listCompleted">
-                            <!-- Tasks drop here -->
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </main>
 
-        <!-- Create Task Modal -->
+        
         <div class="modal hidden" id="taskModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    <!-- Lucide Icons script -->
+    
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="app.js"></script>
 </body>

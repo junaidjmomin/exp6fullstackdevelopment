@@ -9,19 +9,19 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
-// Serve the plain HTML frontend
+
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Connect to MongoDB Atlas
+
 mongoose.connect('mongodb+srv://junaidm:Junaid%402026@mongoprac.39tt8zp.mongodb.net/tasktracker?retryWrites=true&w=majority&appName=MongoPrac', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// --- APIs ---
 
-// POST /tasks - Create task
+
+
 app.post('/tasks', async (req, res) => {
   try {
     const task = new Task(req.body);
@@ -32,7 +32,7 @@ app.post('/tasks', async (req, res) => {
   }
 });
 
-// GET /tasks - Get all tasks
+
 app.get('/tasks', async (req, res) => {
   try {
     const tasks = await Task.find();
@@ -42,7 +42,7 @@ app.get('/tasks', async (req, res) => {
   }
 });
 
-// PUT /tasks/:id - Update task (e.g., status)
+
 app.put('/tasks/:id', async (req, res) => {
   try {
     const updatedTask = await Task.findByIdAndUpdate(
@@ -56,7 +56,7 @@ app.put('/tasks/:id', async (req, res) => {
   }
 });
 
-// DELETE /tasks/:id - Delete task
+
 app.delete('/tasks/:id', async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
